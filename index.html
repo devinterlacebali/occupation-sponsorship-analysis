@@ -30,7 +30,34 @@
       var(--paper);
     min-height:100vh;
   }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 48px 28px 80px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 48px 28px 80px; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+  body.unlocked .wrap { opacity: 1; pointer-events: all; }
+  
+  #lockscreen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0a0c; display: flex; align-items: center; justify-content: center;
+    z-index: 9999; color: white; transition: all 0.5s ease;
+  }
+  #lockscreen.hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+  .lock-card {
+    background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px);
+    text-align: center; max-width: 380px; width: 90%;
+  }
+  .lock-card h2 { font-family: 'Fraunces', serif; margin-bottom: 20px; font-size: 24px; }
+  .lock-card input {
+    width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.3); color: white; margin-bottom: 16px; text-align: center;
+    font-size: 16px; outline: none; transition: border 0.3s;
+  }
+  .lock-card input:focus { border-color: var(--accent); }
+  .lock-card button {
+    background: var(--accent); color: white; border: none; padding: 12px 24px;
+    border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: background 0.3s;
+  }
+  .lock-card button:hover { background: var(--accent-deep); }
+  .lock-error { color: #ff6b6b; font-size: 13px; margin-top: 12px; display: none; }
+
 
   .hero { border-bottom: 1px solid var(--line); padding-bottom: 40px; margin-bottom: 48px; position:relative; }
   .hero::before {
@@ -170,6 +197,15 @@
 </style>
 </head>
 <body>
+  <div id="lockscreen">
+    <div class="lock-card">
+      <h2>Secure Access</h2>
+      <p style="font-size: 14px; color: #aaa; margin-bottom: 24px;">Please enter password to view report</p>
+      <input type="password" id="passInput" placeholder="••••••••">
+      <button onclick="checkPass()">Unlock Report</button>
+      <div id="lockError" class="lock-error">Incorrect password. Please try again.</div>
+    </div>
+  </div>
   <div class="wrap">
     <header class="hero">
       <div class="eyebrow">Confidential candidate report — prepared April 2026</div>
@@ -1925,6 +1961,23 @@
     </footer>
   </div>
 <script>
+  function checkPass() {
+    const input = document.getElementById('passInput');
+    const screen = document.getElementById('lockscreen');
+    const error = document.getElementById('lockError');
+    if (input.value === 'Interlace@2026') {
+      screen.classList.add('hidden');
+      document.body.classList.add('unlocked');
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  }
+  document.getElementById('passInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') checkPass();
+  });
+
   const pills = document.querySelectorAll('.pill');
   const cards = document.querySelectorAll('#cards .card');
   const filters = { state: 'all', sponsor: 'all' };
