@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Australian Job Market Dashboard — March 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2472B0;
+    --primary-dark: #1A5583;
+    --primary-mid: #4A91C5;
+    --primary-light: #9DC9E6;
+    --primary-tint: #E8F1F8;
+    --primary-soft: #F4F9FC;
+    --white: #FFFFFF;
+    --ink: #15222E;
+    --ink-soft: #4B5A68;
+    --ink-mute: #8B97A3;
+    --line: #E5EBF0;
+    --line-soft: #F1F4F7;
+    --accent: #D97757;
+    --shadow-sm: 0 1px 2px rgba(21,34,46,0.04);
+    --shadow-md: 0 2px 8px rgba(21,34,46,0.06);
+    --shadow-lg: 0 4px 16px rgba(21,34,46,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    background: var(--primary-soft);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+  }
+
+  .page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ---- Header ---- */
+  header {
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .brand-mark::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--white);
+    border-radius: 50%;
+  }
+  h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  h1 em { font-style: italic; color: var(--primary); }
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 720px;
+    line-height: 1.55;
+  }
+  .meta {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  .meta span strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- Section ---- */
+  section { margin-bottom: 56px; scroll-margin-top: 20px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head-left { display: flex; align-items: baseline; gap: 14px; }
+  .section-num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--primary);
+    font-weight: 400;
+  }
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .section-note {
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-style: italic;
+  }
+
+  /* ---- KPI Cards ---- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  .kpi {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 22px 20px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi:hover { border-color: var(--primary); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 3px;
+    width: 28px;
+    background: var(--primary);
+    border-radius: 0 0 3px 3px;
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .kpi-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .kpi-value .cur { font-size: 22px; color: var(--primary); vertical-align: top; margin-right: 2px;}
+  .kpi-sub {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ---- Platform cards ---- */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .platform-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 26px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .platform-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .platform-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+  .platform-count {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .platform-bar {
+    height: 4px;
+    background: var(--line-soft);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .platform-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: width 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+  .platform-pct { font-size: 12px; color: var(--ink-soft); }
+  .platform-pct strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- Cards / two-col ---- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--ink-mute);
+    margin-bottom: 20px;
+  }
+
+  /* ---- Bar list ---- */
+  .bar-list { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 50px;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+  }
+  .bar-row .label {
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-track {
+    height: 10px;
+    background: var(--line-soft);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 5px;
+    transition: width 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+  .bar-row .count {
+    text-align: right;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  /* ---- Tabs & chips ---- */
+  .state-tabs, .occ-selector {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px;
+  }
+  .state-tab, .occ-chip {
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .state-tab:hover, .occ-chip:hover { border-color: var(--primary); color: var(--primary); }
+  .state-tab.active, .occ-chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+  }
+  .state-tab .tab-count { font-weight: 400; opacity: 0.75; margin-left: 6px; }
+
+  /* ---- Skills display ---- */
+  .skills-list { display: flex; flex-direction: column; gap: 10px; }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 190px 1fr 70px;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+  }
+  .skill-row .label {
+    color: var(--ink); font-weight: 500;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .skill-row .count { text-align: right; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .skill-row .label .skill-type {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .skill-type.hard { background: var(--primary-tint); color: var(--primary-dark); }
+  .skill-type.soft { background: #F5E9E2; color: var(--accent); }
+
+  /* ---- Skills header summary (for selected occ) ---- */
+  .skills-header {
+    background: linear-gradient(to right, var(--primary-tint), transparent);
+    border-left: 3px solid var(--primary);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+  }
+  .skills-header .label-xs {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .skills-header .occ-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .skills-header .meta-line {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .skills-header .meta-line strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- Experience donut ---- */
+  .exp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    align-items: center;
+  }
+  .donut-wrapper { display: flex; justify-content: center; }
+  .exp-legend { display: flex; flex-direction: column; gap: 10px; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 14px 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    font-size: 13px;
+    padding: 6px 0;
+  }
+  .exp-swatch { width: 12px; height: 12px; border-radius: 3px; }
+  .exp-name { color: var(--ink); font-weight: 500; }
+  .exp-num { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .exp-pct {
+    color: var(--ink-mute);
+    font-size: 11px;
+    min-width: 40px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- STACKED HORIZONTAL BAR ---- */
+  .stacked-bar {
+    height: 28px;
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--line-soft);
+    margin: 4px 0 10px;
+  }
+  .stack-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.6s cubic-bezier(.2,.8,.2,1);
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .stack-legend {
+    display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px;
+  }
+  .stack-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .stack-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  /* ---- SALARY SECTION ---- */
+  .salary-headline {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 22px;
+    margin-bottom: 18px;
+  }
+  .salary-hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 28px 28px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .salary-hero::after {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .salary-hero::before {
+    content: '';
+    position: absolute;
+    right: -20px; bottom: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .salary-hero .sh-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+  .salary-hero .sh-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  .salary-hero .sh-value .cur { font-size: 28px; opacity: 0.8; vertical-align: top; margin-right: 3px;}
+  .salary-hero .sh-range {
+    margin-top: 14px;
+    font-size: 13px;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+  }
+  .salary-hero .sh-range strong { font-weight: 600; }
+  .salary-hero .sh-hint {
+    margin-top: 16px;
+    font-size: 11px;
+    opacity: 0.72;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    line-height: 1.5;
+  }
+
+  /* Salary type donut */
+  .sal-type-wrap {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 22px;
+    align-items: center;
+  }
+
+  /* Salary range chart (box-plot style) per occupation */
+  .salary-table {
+    width: 100%;
+    margin-top: 0;
+  }
+  .salary-table-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px 70px;
+    gap: 14px;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 10px;
+  }
+  .salary-table-header .align-r { text-align: right; }
+  .salary-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px 70px;
+    gap: 14px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13px;
+  }
+  .salary-row:last-child { border-bottom: none; }
+  .salary-row .label { color: var(--ink); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .salary-row .median, .salary-row .n-col { text-align: right; font-variant-numeric: tabular-nums; }
+  .salary-row .median { color: var(--primary-dark); font-weight: 600; }
+  .salary-row .n-col { color: var(--ink-mute); font-size: 12px; }
+
+  /* Horizontal salary range bar */
+  .range-track {
+    position: relative;
+    height: 24px;
+    background: var(--line-soft);
+    border-radius: 4px;
+  }
+  .range-fill {
+    position: absolute;
+    top: 4px; bottom: 4px;
+    background: linear-gradient(to right, var(--primary-light), var(--primary));
+    border-radius: 2px;
+    transition: all 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+  .range-median {
+    position: absolute;
+    top: -2px; bottom: -2px;
+    width: 3px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .range-scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--ink-mute);
+    padding: 4px 2px 10px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- State cards grid ---- */
+  .state-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .state-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .state-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .state-abbrev {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: var(--primary);
+    font-weight: 400;
+  }
+  .state-total {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .state-total-label {
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .state-top-list { display: flex; flex-direction: column; gap: 7px; }
+  .state-top-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    gap: 8px;
+  }
+  .state-top-item span:first-child {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .state-top-item .mini-count { color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+
+  /* ---- Footer & Nav ---- */
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-mute);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  footer em { font-family: 'Instrument Serif', serif; color: var(--ink-soft); }
+
+  .quick-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .nav-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--white);
+    transition: all 0.15s;
+  }
+  .nav-link:hover { color: var(--primary); border-color: var(--primary); background: var(--primary-tint); }
+
+  .insight {
+    background: var(--primary-tint);
+    border-left: 3px solid var(--primary);
+    padding: 12px 14px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: var(--ink);
+    margin-top: 18px;
+    line-height: 1.55;
+  }
+  .insight strong { color: var(--primary-dark); font-weight: 600; }
+
+  /* ---- Bubble chart for occupations ---- */
+  .bubble-wrap {
+    position: relative;
+    width: 100%;
+    padding: 10px 0 4px;
+  }
+  .bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.25s ease;
+    cursor: default;
+    line-height: 1.1;
+    padding: 4px;
+    position: relative;
+  }
+  .bubble:hover { transform: scale(1.06); box-shadow: var(--shadow-md); }
+  .bubble .b-count {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    margin-top: 2px;
+  }
+
+  /* ---- Small multiples (platform x occupation) as stacked mini bars ---- */
+  .mini-bar-block { margin-bottom: 18px; }
+  .mini-bar-block > .mbb-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .mini-bar-block > .mbb-title .mbb-total { color: var(--ink-mute); font-weight: 500; letter-spacing: 0; text-transform: none; font-size: 11px; }
+  .mini-bar {
+    display: flex;
+    height: 22px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--line-soft);
+  }
+  .mini-bar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--white);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .mini-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+  .mini-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .mini-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 1024px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .platform-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .state-grid { grid-template-columns: repeat(2, 1fr); }
+    .exp-layout { grid-template-columns: 1fr; }
+    .salary-headline { grid-template-columns: 1fr; }
+    .sal-type-wrap { grid-template-columns: 1fr; justify-items: center; }
+    h1 { font-size: 38px; }
+    .bar-row, .skill-row { grid-template-columns: 140px 1fr 60px; }
+    .salary-row, .salary-table-header { grid-template-columns: 140px 1fr 80px 60px; }
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 24px 18px 60px; }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .state-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 30px; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .bar-row, .skill-row { grid-template-columns: 110px 1fr 50px; font-size: 12px; }
+    .salary-row, .salary-table-header { grid-template-columns: 100px 1fr 70px 40px; font-size: 11.5px; }
+    .salary-hero .sh-value { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header>
+    <div class="brand-mark">Labour Market Intelligence</div>
+    <h1>Australian Job Market <em>Dashboard</em></h1>
+    <p class="subtitle">A consolidated view of <strong style="color:var(--ink);font-weight:600;">11,058</strong> job vacancies scraped from Jora, Seek, and Indeed — with salary benchmarks, occupation-specific skill requirements, and experience levels drawn directly from job descriptions.</p>
+    <div class="meta">
+      <span><strong>Data period:</strong> as of 17 March 2026</span>
+      <span><strong>Coverage:</strong> Australia — 8 states &amp; territories</span>
+      <span><strong>Sources:</strong> Jora · Seek · Indeed</span>
+    </div>
+    <nav class="quick-nav">
+      <a class="nav-link" href="#s1">① Platform</a>
+      <a class="nav-link" href="#s2">② Occupation Areas</a>
+      <a class="nav-link" href="#s3">③ States &amp; Regions</a>
+      <a class="nav-link" href="#s4">④ Salary Benchmarks</a>
+      <a class="nav-link" href="#s5">⑤ Skills in Demand</a>
+      <a class="nav-link" href="#s6">⑥ Experience &amp; Level</a>
+    </nav>
+  </header>
+
+  <!-- Overview KPIs -->
+  <section>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Total Vacancies</div>
+        <div class="kpi-value" id="kpiTotal">0</div>
+        <div class="kpi-sub">Across Jora, Seek &amp; Indeed</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Median Salary</div>
+        <div class="kpi-value" id="kpiMedSalary"><span class="cur">$</span>—</div>
+        <div class="kpi-sub" id="kpiMedSalarySub">Annualised, mid-point</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">States Covered</div>
+        <div class="kpi-value">8</div>
+        <div class="kpi-sub">All Australian jurisdictions</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Occupation Areas</div>
+        <div class="kpi-value">20</div>
+        <div class="kpi-sub">Grouped from job titles</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">With Salary Data</div>
+        <div class="kpi-value" id="kpiSalRecords">0</div>
+        <div class="kpi-sub" id="kpiSalPct">— of listings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1 - Platform -->
+  <section id="s1">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-num">01</span>
+        <h2>Vacancies by Online Platform</h2>
+      </div>
+      <span class="section-note">How the total is distributed across Jora, Seek &amp; Indeed</span>
+    </div>
+    <div class="platform-grid" id="platformGrid"></div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Platform distribution — at a glance</div>
+      <div class="card-desc">A stacked view of where vacancies sit across the three platforms.</div>
+      <div class="stack-legend" id="platformStackLegend"></div>
+      <div class="stacked-bar" id="platformStackBar"></div>
+    </div>
+    <div class="insight" id="platformInsight"></div>
+  </section>
+
+  <!-- Section 2 - Occupation Areas -->
+  <section id="s2">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-num">02</span>
+        <h2>Occupation Areas</h2>
+      </div>
+      <span class="section-note">Job titles grouped into industry &amp; function clusters</span>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Ranking of occupation areas by vacancy count</div>
+        <div class="card-desc">Titles were parsed and classified into 20 occupation clusters.</div>
+        <div class="bar-list" id="occBarList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Platform specialisation — stacked view</div>
+        <div class="card-desc">Where each platform concentrates its listings (top 5 clusters per platform).</div>
+        <div id="platformOccStack"></div>
+      </div>
+    </div>
+    <div class="insight" id="occInsight"></div>
+  </section>
+
+  <!-- Section 3 - States & Areas -->
+  <section id="s3">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-num">03</span>
+        <h2>State &amp; Regional Distribution</h2>
+      </div>
+      <span class="section-note">Tap a state to see the major occupation areas hiring there</span>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Vacancies by state &amp; territory</div>
+        <div class="card-desc">Totals across all three platforms combined.</div>
+        <div class="bar-list" id="stateBarList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top occupations in selected state</div>
+        <div class="card-desc">Switch between states using the tabs below.</div>
+        <div class="state-tabs" id="stateTabs"></div>
+        <div class="bar-list" id="stateOccList"></div>
+      </div>
+    </div>
+    <div style="margin-top: 22px;">
+      <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:6px;">All states at a glance</div>
+      <div style="font-size:12px; color:var(--ink-mute); margin-bottom:14px;">Each card shows the total vacancies and the three leading occupation areas in that state.</div>
+      <div class="state-grid" id="stateGrid"></div>
+    </div>
+  </section>
+
+  <!-- Section 4 - SALARY -->
+  <section id="s4">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-num">04</span>
+        <h2>Salary Benchmarks</h2>
+      </div>
+      <span class="section-note">All salaries normalised to an annualised figure for comparison</span>
+    </div>
+
+    <div class="salary-headline">
+      <div class="salary-hero">
+        <div class="sh-label">Median Annual Salary · Global</div>
+        <div class="sh-value" id="salaryHeroValue"><span class="cur">$</span>—</div>
+        <div class="sh-range" id="salaryHeroRange"></div>
+        <div class="sh-hint" id="salaryHeroHint"></div>
+      </div>
+      <div class="sal-type-wrap">
+        <div class="donut-wrapper" id="salaryTypeDonut"></div>
+        <div>
+          <div class="card-title">How salaries are quoted</div>
+          <div class="card-desc" style="margin-bottom:10px">Breakdown of salary types used in the listings (before conversion to annualised figures).</div>
+          <div id="salaryTypeLegend" class="exp-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Salary range by occupation area</div>
+      <div class="card-desc">Horizontal bars show the typical range (min–max median). The dark line marks the median mid-point. Only occupations with enough salary data are shown.</div>
+      <div class="salary-table">
+        <div class="salary-table-header">
+          <span>Occupation area</span>
+          <span>Salary range (AUD, annualised)</span>
+          <span class="align-r">Median mid</span>
+          <span class="align-r">Records</span>
+        </div>
+        <div id="salaryRows"></div>
+      </div>
+    </div>
+    <div class="insight"><strong>How this is calculated:</strong> listings come in with per-hour, per-day, per-week or per-year rates. We annualise each one (38-hour week, 52 weeks for full-time equivalence) and apply sanity caps ($25k&ndash;$800k) before computing medians. This lets us compare, for example, an hourly warehouse role fairly against a salaried finance role.</div>
+  </section>
+
+  <!-- Section 5 - Skills in demand -->
+  <section id="s5">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-num">05</span>
+        <h2>Skills in Demand &mdash; by Occupation</h2>
+      </div>
+      <span class="section-note">Skill libraries are tailored to each occupation: technical, certification &amp; soft skills</span>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Overall top skills across all listings</div>
+        <div class="card-desc">Aggregated from occupation-specific scans. Reflects both soft skills (common to all roles) and role-specific requirements.</div>
+        <div class="bar-list" id="skillsOverall"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Skills required for a specific occupation</div>
+        <div class="card-desc">Each occupation uses its own skill dictionary. E.g. IT &amp; Technology looks for Python/AWS/Docker; Healthcare looks for AHPRA, WWCC &amp; CPR; Construction looks for White Card, Forklift Licence.</div>
+        <div class="occ-selector" id="occSelectorSkills"></div>
+        <div class="skills-header" id="skillsHeader"></div>
+        <div class="skills-list" id="skillsByOcc"></div>
+      </div>
+    </div>
+    <div class="insight"><strong>Why occupation-specific?</strong> Platform-provided skill tags are missing on Indeed and inconsistent elsewhere. For each occupation we built a dedicated dictionary of <em>hard skills</em> (e.g. AutoCAD for Engineering, Xero for Finance) and <em>soft skills</em> — then scanned the full job descriptions. Tags next to each skill tell you whether it's a technical/certification requirement <span class="skill-type hard" style="margin-left:4px">HARD</span> or an interpersonal trait <span class="skill-type soft">SOFT</span>.</div>
+  </section>
+
+  <!-- Section 6 - Experience -->
+  <section id="s6">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-num">06</span>
+        <h2>Job Level &amp; Experience Required</h2>
+      </div>
+      <span class="section-note">Derived from job descriptions &amp; titles — not from the platform level field</span>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Experience level distribution</div>
+        <div class="card-desc">Across all listings. &ldquo;Experienced (Not Specified)&rdquo; covers roles requiring prior experience without stating a level.</div>
+        <div class="exp-layout">
+          <div class="donut-wrapper" id="expDonut"></div>
+          <div class="exp-legend" id="expLegend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Experience level by occupation area</div>
+        <div class="card-desc">Choose an occupation to compare the mix of levels employers are seeking.</div>
+        <div class="occ-selector" id="occSelectorExp"></div>
+        <div class="skills-list" id="expByOcc"></div>
+      </div>
+    </div>
+    <div class="insight"><strong>How levels are classified:</strong> we scan titles for keywords (senior, lead, manager, graduate, intern…) and parse descriptions for phrases like <em>&ldquo;5+ years of experience&rdquo;</em>, <em>&ldquo;training provided&rdquo;</em>, or <em>&ldquo;entry level&rdquo;</em>. This gives a consistent signal across Jora, Seek, and Indeed where the platform-provided level field is inconsistent or missing.</div>
+  </section>
+
+  <footer>
+    <div><em>Australian Job Market Dashboard</em> · Source data scraped from Jora, Seek &amp; Indeed</div>
+    <div>Snapshot: 17 March 2026</div>
+  </footer>
+
+</div>
+
+<script>
+const DATA = {"total_jobs": 11058, "total_platforms": 3, "total_states": 8, "total_occupations": 20, "platform_counts": {"Indeed": 4165, "Seek": 3930, "Jora": 2963}, "occupation_counts": {"Administration & Office": 2893, "Other": 1980, "Transport & Logistics": 1090, "Sales & Marketing": 843, "Management & Leadership": 653, "Healthcare & Medical": 649, "Care & Community Services": 588, "Hospitality & Tourism": 497, "IT & Technology": 466, "Finance & Accounting": 424, "Education & Training": 334, "Construction & Trades": 253, "Cleaning & Facilities": 105, "Manufacturing & Production": 77, "HR & Recruitment": 66, "Legal": 38, "Arts, Media & Design": 36, "Agriculture & Mining": 27, "Engineering": 23, "Security & Safety": 16}, "state_counts": {"VIC": 1828, "NSW": 1818, "QLD": 1625, "SA": 1406, "ACT": 1290, "WA": 1175, "TAS": 1063, "NT": 853}, "top_occ_per_state": {"NSW": [{"occupation_area": "Administration & Office", "count": 361}, {"occupation_area": "Other", "count": 319}, {"occupation_area": "Sales & Marketing", "count": 169}, {"occupation_area": "Care & Community Services", "count": 159}, {"occupation_area": "Transport & Logistics", "count": 145}], "VIC": [{"occupation_area": "Administration & Office", "count": 506}, {"occupation_area": "Other", "count": 296}, {"occupation_area": "Transport & Logistics", "count": 185}, {"occupation_area": "Healthcare & Medical", "count": 132}, {"occupation_area": "Care & Community Services", "count": 127}], "WA": [{"occupation_area": "Administration & Office", "count": 361}, {"occupation_area": "Other", "count": 251}, {"occupation_area": "Transport & Logistics", "count": 97}, {"occupation_area": "Sales & Marketing", "count": 80}, {"occupation_area": "Healthcare & Medical", "count": 65}], "QLD": [{"occupation_area": "Administration & Office", "count": 459}, {"occupation_area": "Other", "count": 271}, {"occupation_area": "Transport & Logistics", "count": 228}, {"occupation_area": "Sales & Marketing", "count": 105}, {"occupation_area": "Healthcare & Medical", "count": 104}], "SA": [{"occupation_area": "Administration & Office", "count": 432}, {"occupation_area": "Other", "count": 235}, {"occupation_area": "Transport & Logistics", "count": 166}, {"occupation_area": "Healthcare & Medical", "count": 99}, {"occupation_area": "Sales & Marketing", "count": 76}], "TAS": [{"occupation_area": "Other", "count": 222}, {"occupation_area": "Administration & Office", "count": 216}, {"occupation_area": "Sales & Marketing", "count": 116}, {"occupation_area": "Transport & Logistics", "count": 88}, {"occupation_area": "Management & Leadership", "count": 82}], "ACT": [{"occupation_area": "Administration & Office", "count": 313}, {"occupation_area": "Other", "count": 224}, {"occupation_area": "IT & Technology", "count": 130}, {"occupation_area": "Management & Leadership", "count": 121}, {"occupation_area": "Sales & Marketing", "count": 119}], "NT": [{"occupation_area": "Administration & Office", "count": 245}, {"occupation_area": "Other", "count": 162}, {"occupation_area": "Transport & Logistics", "count": 77}, {"occupation_area": "Management & Leadership", "count": 74}, {"occupation_area": "Sales & Marketing", "count": 59}]}, "top_skills_per_occ": {"Finance & Accounting": [{"skill": "Communication", "count": 262}, {"skill": "Attention to Detail", "count": 160}, {"skill": "Excel \u2014 Advanced", "count": 52}, {"skill": "Bank Reconciliation", "count": 46}, {"skill": "Audit", "count": 35}, {"skill": "Accounts Payable / Receivable", "count": 28}, {"skill": "Budgeting & Forecasting", "count": 23}, {"skill": "Payroll Processing", "count": 22}, {"skill": "Financial Reporting", "count": 17}, {"skill": "Xero", "count": 15}], "Administration & Office": [{"skill": "Communication", "count": 1657}, {"skill": "Attention to Detail", "count": 736}, {"skill": "Customer Service", "count": 713}, {"skill": "Multitasking", "count": 624}, {"skill": "Confidentiality", "count": 467}, {"skill": "Microsoft Office Suite", "count": 319}, {"skill": "Excel / Spreadsheets", "count": 315}, {"skill": "Organisational Skills", "count": 274}, {"skill": "Reception / Switchboard", "count": 242}, {"skill": "Diary / Calendar Management", "count": 183}], "Hospitality & Tourism": [{"skill": "Communication", "count": 306}, {"skill": "Flexibility / Availability", "count": 185}, {"skill": "Attention to Detail", "count": 164}, {"skill": "Customer Service", "count": 161}, {"skill": "Stamina / Standing for Long Periods", "count": 157}, {"skill": "Multitasking", "count": 133}, {"skill": "Friendly / Outgoing", "count": 106}, {"skill": "Teamwork", "count": 79}, {"skill": "Working Weekends / Nights", "count": 70}, {"skill": "Cleanliness / Hygiene", "count": 18}], "Care & Community Services": [{"skill": "Communication", "count": 343}, {"skill": "Cultural Awareness", "count": 196}, {"skill": "Working with Children Check", "count": 134}, {"skill": "Police Check", "count": 113}, {"skill": "Empathy / Compassion", "count": 100}, {"skill": "CPR / First Aid", "count": 64}, {"skill": "NDIS Experience", "count": 61}, {"skill": "Child Safety", "count": 52}, {"skill": "Case Management", "count": 43}, {"skill": "Driver Licence", "count": 40}], "Construction & Trades": [{"skill": "Reliability", "count": 52}, {"skill": "Forklift Licence", "count": 23}, {"skill": "Teamwork", "count": 22}, {"skill": "Physical Fitness", "count": 17}, {"skill": "Driver Licence", "count": 16}, {"skill": "First Aid", "count": 15}, {"skill": "WHS / Safety Focus", "count": 12}, {"skill": "White Card", "count": 6}, {"skill": "Hand & Power Tools", "count": 4}, {"skill": "Site Supervision", "count": 2}], "Sales & Marketing": [{"skill": "Communication", "count": 512}, {"skill": "Negotiation", "count": 53}, {"skill": "KPI / Target Driven", "count": 32}, {"skill": "CRM (Salesforce/HubSpot)", "count": 30}, {"skill": "Cold Calling / Prospecting", "count": 28}, {"skill": "Social Media Marketing", "count": 25}, {"skill": "Account Management", "count": 21}, {"skill": "Customer Relationship", "count": 16}, {"skill": "B2B Sales", "count": 10}, {"skill": "Presentation Skills", "count": 8}], "IT & Technology": [{"skill": "Communication", "count": 270}, {"skill": "Stakeholder Management", "count": 114}, {"skill": "System Administration", "count": 48}, {"skill": "Problem Solving", "count": 43}, {"skill": "Troubleshooting", "count": 21}, {"skill": "Agile / Scrum", "count": 7}, {"skill": "C# / .NET", "count": 5}, {"skill": "Cloud \u2014 Azure", "count": 4}, {"skill": "Cybersecurity", "count": 4}, {"skill": "Docker / Kubernetes", "count": 3}], "Transport & Logistics": [{"skill": "Communication", "count": 646}, {"skill": "Reliability / Punctual", "count": 287}, {"skill": "Warehouse Operations", "count": 124}, {"skill": "Forklift Licence", "count": 101}, {"skill": "Inventory Management", "count": 77}, {"skill": "Teamwork", "count": 76}, {"skill": "Driver Licence (Standard)", "count": 74}, {"skill": "Physical Fitness", "count": 67}, {"skill": "Manual Handling", "count": 55}, {"skill": "Pick & Pack", "count": 53}], "Management & Leadership": [{"skill": "Communication", "count": 355}, {"skill": "Recruitment & Hiring", "count": 252}, {"skill": "Stakeholder Engagement", "count": 172}, {"skill": "Coaching / Mentoring", "count": 111}, {"skill": "Analytical / Problem Solving", "count": 77}, {"skill": "Team Leadership", "count": 40}, {"skill": "Project Management", "count": 25}, {"skill": "Decision Making", "count": 16}, {"skill": "Performance Management", "count": 16}, {"skill": "Business Development", "count": 12}], "Other": [{"skill": "Communication", "count": 1148}, {"skill": "Adaptability / Flexibility", "count": 833}, {"skill": "Teamwork", "count": 823}, {"skill": "Customer Service", "count": 470}, {"skill": "Attention to Detail", "count": 424}, {"skill": "Leadership", "count": 387}, {"skill": "Reliability", "count": 360}, {"skill": "Microsoft Office", "count": 199}, {"skill": "Problem Solving", "count": 187}, {"skill": "Time Management", "count": 186}], "Legal": [{"skill": "Communication", "count": 23}, {"skill": "Attention to Detail", "count": 14}, {"skill": "Confidentiality", "count": 9}, {"skill": "Contract Review", "count": 2}, {"skill": "Court Appearance", "count": 1}, {"skill": "Litigation", "count": 1}], "Manufacturing & Production": [{"skill": "Reliability", "count": 30}, {"skill": "Attention to Detail", "count": 27}, {"skill": "Forklift Licence", "count": 10}, {"skill": "Physical Fitness", "count": 8}, {"skill": "Manual Handling", "count": 8}, {"skill": "HACCP", "count": 5}, {"skill": "Teamwork", "count": 5}, {"skill": "Shift Work", "count": 5}, {"skill": "GMP (Good Manufacturing Practice)", "count": 3}, {"skill": "WHS / Safety", "count": 3}], "Arts, Media & Design": [{"skill": "Communication", "count": 25}, {"skill": "Attention to Detail", "count": 12}, {"skill": "Adobe Creative Suite", "count": 4}, {"skill": "Portfolio", "count": 3}, {"skill": "Photography", "count": 2}, {"skill": "Journalism / Editorial", "count": 1}, {"skill": "Video Editing (Premiere/Final Cut)", "count": 1}, {"skill": "After Effects / Motion", "count": 1}, {"skill": "Creative Thinking", "count": 1}], "HR & Recruitment": [{"skill": "Communication", "count": 40}, {"skill": "Stakeholder Management", "count": 19}, {"skill": "Recruitment / Talent Acquisition", "count": 18}, {"skill": "Confidentiality", "count": 9}, {"skill": "Onboarding / Induction", "count": 3}, {"skill": "WHS / Safety", "count": 2}, {"skill": "Employee Relations", "count": 1}], "Healthcare & Medical": [{"skill": "Communication with Patients", "count": 392}, {"skill": "Teamwork", "count": 288}, {"skill": "Attention to Detail", "count": 167}, {"skill": "Working with Children Check", "count": 139}, {"skill": "Empathy / Compassion", "count": 96}, {"skill": "Mental Health Support", "count": 63}, {"skill": "CPR / First Aid", "count": 50}, {"skill": "Aged Care Experience", "count": 48}, {"skill": "NDIS Worker Check", "count": 33}, {"skill": "Patient Care", "count": 32}], "Cleaning & Facilities": [{"skill": "Reliability", "count": 24}, {"skill": "Attention to Detail", "count": 20}, {"skill": "Working Independently", "count": 14}, {"skill": "Police Check", "count": 10}, {"skill": "Time Management", "count": 7}, {"skill": "Teamwork", "count": 7}, {"skill": "WHS / Safety", "count": 5}, {"skill": "Driver Licence", "count": 5}, {"skill": "Physical Fitness", "count": 5}, {"skill": "Own Vehicle", "count": 2}], "Education & Training": [{"skill": "Communication", "count": 181}, {"skill": "Teamwork", "count": 160}, {"skill": "Working with Children Check", "count": 84}, {"skill": "Mentoring / Coaching", "count": 53}, {"skill": "Certificate IV in TAE", "count": 6}, {"skill": "Adult Education / Training", "count": 5}, {"skill": "Planning & Organisation", "count": 3}, {"skill": "VIT / Teacher Registration", "count": 3}, {"skill": "Patience", "count": 2}, {"skill": "Curriculum Development", "count": 2}], "Engineering": [{"skill": "Communication", "count": 14}, {"skill": "Project Management", "count": 3}, {"skill": "Commissioning", "count": 2}, {"skill": "Problem Solving", "count": 1}], "Agriculture & Mining": [{"skill": "Teamwork", "count": 5}, {"skill": "WHS / Safety", "count": 4}, {"skill": "Physical Fitness", "count": 1}, {"skill": "Driver Licence (HR/MR)", "count": 1}, {"skill": "First Aid", "count": 1}, {"skill": "Remote Work", "count": 1}], "Security & Safety": [{"skill": "Communication", "count": 9}, {"skill": "Attention to Detail", "count": 2}, {"skill": "Risk Assessment", "count": 1}]}, "exp_per_occ": {"Finance & Accounting": {"Experienced (Not Specified)": 260, "Senior / Lead": 93, "Entry Level / Graduate": 34, "Mid Level": 24, "Junior / Associate": 9, "Executive / Director": 4}, "Administration & Office": {"Experienced (Not Specified)": 2299, "Senior / Lead": 215, "Entry Level / Graduate": 193, "Mid Level": 92, "Junior / Associate": 74, "Executive / Director": 20}, "Hospitality & Tourism": {"Experienced (Not Specified)": 371, "Senior / Lead": 57, "Entry Level / Graduate": 41, "Junior / Associate": 14, "Mid Level": 12, "Executive / Director": 2}, "Care & Community Services": {"Experienced (Not Specified)": 459, "Senior / Lead": 85, "Entry Level / Graduate": 19, "Mid Level": 15, "Junior / Associate": 10}, "Construction & Trades": {"Experienced (Not Specified)": 185, "Entry Level / Graduate": 35, "Senior / Lead": 22, "Mid Level": 6, "Junior / Associate": 5}, "Sales & Marketing": {"Experienced (Not Specified)": 466, "Senior / Lead": 246, "Entry Level / Graduate": 90, "Mid Level": 22, "Junior / Associate": 15, "Executive / Director": 4}, "IT & Technology": {"Experienced (Not Specified)": 259, "Senior / Lead": 84, "Executive / Director": 75, "Entry Level / Graduate": 32, "Junior / Associate": 8, "Mid Level": 8}, "Transport & Logistics": {"Experienced (Not Specified)": 827, "Senior / Lead": 106, "Entry Level / Graduate": 88, "Mid Level": 41, "Junior / Associate": 24, "Executive / Director": 4}, "Management & Leadership": {"Senior / Lead": 513, "Experienced (Not Specified)": 97, "Executive / Director": 32, "Entry Level / Graduate": 6, "Mid Level": 4, "Junior / Associate": 1}, "Other": {"Experienced (Not Specified)": 1627, "Entry Level / Graduate": 201, "Senior / Lead": 70, "Mid Level": 49, "Junior / Associate": 33}, "Legal": {"Experienced (Not Specified)": 29, "Senior / Lead": 6, "Entry Level / Graduate": 3}, "Manufacturing & Production": {"Experienced (Not Specified)": 57, "Entry Level / Graduate": 11, "Mid Level": 6, "Senior / Lead": 3}, "Arts, Media & Design": {"Experienced (Not Specified)": 22, "Entry Level / Graduate": 10, "Senior / Lead": 2, "Junior / Associate": 1, "Mid Level": 1}, "HR & Recruitment": {"Experienced (Not Specified)": 42, "Senior / Lead": 13, "Entry Level / Graduate": 8, "Mid Level": 3}, "Healthcare & Medical": {"Experienced (Not Specified)": 491, "Senior / Lead": 60, "Entry Level / Graduate": 52, "Mid Level": 26, "Junior / Associate": 16, "Executive / Director": 4}, "Cleaning & Facilities": {"Experienced (Not Specified)": 80, "Senior / Lead": 18, "Junior / Associate": 4, "Executive / Director": 1, "Entry Level / Graduate": 1, "Mid Level": 1}, "Education & Training": {"Experienced (Not Specified)": 232, "Senior / Lead": 72, "Entry Level / Graduate": 17, "Executive / Director": 9, "Mid Level": 2, "Junior / Associate": 2}, "Engineering": {"Experienced (Not Specified)": 15, "Entry Level / Graduate": 4, "Senior / Lead": 3, "Junior / Associate": 1}, "Agriculture & Mining": {"Experienced (Not Specified)": 20, "Senior / Lead": 5, "Mid Level": 2}, "Security & Safety": {"Experienced (Not Specified)": 11, "Senior / Lead": 4, "Mid Level": 1}}, "exp_counts": {"Experienced (Not Specified)": 7849, "Senior / Lead": 1677, "Entry Level / Graduate": 845, "Mid Level": 315, "Junior / Associate": 217, "Executive / Director": 155}, "platform_occ": {"Jora": [{"occupation_area": "Administration & Office", "count": 732}, {"occupation_area": "Other", "count": 503}, {"occupation_area": "Transport & Logistics", "count": 303}, {"occupation_area": "Sales & Marketing", "count": 276}, {"occupation_area": "Management & Leadership", "count": 172}, {"occupation_area": "Hospitality & Tourism", "count": 162}, {"occupation_area": "Finance & Accounting", "count": 160}, {"occupation_area": "IT & Technology", "count": 144}, {"occupation_area": "Construction & Trades", "count": 118}, {"occupation_area": "Care & Community Services", "count": 98}], "Seek": [{"occupation_area": "Administration & Office", "count": 1192}, {"occupation_area": "Transport & Logistics", "count": 664}, {"occupation_area": "Other", "count": 510}, {"occupation_area": "Sales & Marketing", "count": 315}, {"occupation_area": "Hospitality & Tourism", "count": 250}, {"occupation_area": "Healthcare & Medical", "count": 226}, {"occupation_area": "Finance & Accounting", "count": 220}, {"occupation_area": "IT & Technology", "count": 154}, {"occupation_area": "Management & Leadership", "count": 89}, {"occupation_area": "Construction & Trades", "count": 86}], "Indeed": [{"occupation_area": "Administration & Office", "count": 969}, {"occupation_area": "Other", "count": 967}, {"occupation_area": "Care & Community Services", "count": 408}, {"occupation_area": "Management & Leadership", "count": 392}, {"occupation_area": "Healthcare & Medical", "count": 329}, {"occupation_area": "Education & Training", "count": 267}, {"occupation_area": "Sales & Marketing", "count": 252}, {"occupation_area": "IT & Technology", "count": 168}, {"occupation_area": "Transport & Logistics", "count": 123}, {"occupation_area": "Hospitality & Tourism", "count": 85}]}, "top_skills_overall": [{"skill": "Communication", "count": 5791}, {"skill": "Attention to Detail", "count": 1726}, {"skill": "Teamwork", "count": 1465}, {"skill": "Customer Service", "count": 1344}, {"skill": "Adaptability / Flexibility", "count": 833}, {"skill": "Multitasking", "count": 817}, {"skill": "Confidentiality", "count": 485}, {"skill": "Reliability", "count": 466}, {"skill": "Communication with Patients", "count": 392}, {"skill": "Leadership", "count": 387}, {"skill": "Working with Children Check", "count": 357}, {"skill": "Microsoft Office Suite", "count": 319}, {"skill": "Excel / Spreadsheets", "count": 315}, {"skill": "Reliability / Punctual", "count": 287}, {"skill": "Organisational Skills", "count": 274}], "overall_salary": {"n_records": 4422, "min_median": 71136.0, "max_median": 80000.0, "mid_median": 75331.84, "min_mean": 80137.61975802804, "max_mean": 91180.31326322931, "mid_mean": 85658.96651062867, "p25": 66607.90125, "p75": 93860.0}, "salary_per_occ": {"Finance & Accounting": {"n": 156, "min_median": 80000.0, "max_median": 90000.0, "mid_median": 85000.0, "p25": 75807.0, "p75": 103125.0}, "Administration & Office": {"n": 1244, "min_median": 73000.0, "max_median": 80000.0, "mid_median": 75950.0, "p25": 67184.0, "p75": 88768.5}, "Hospitality & Tourism": {"n": 204, "min_median": 60000.0, "max_median": 73000.0, "mid_median": 66729.52, "p25": 62244.0, "p75": 73864.0}, "Care & Community Services": {"n": 274, "min_median": 74238.61, "max_median": 82992.0, "mid_median": 79040.0, "p25": 70101.5, "p75": 88183.94}, "Construction & Trades": {"n": 90, "min_median": 68873.48000000001, "max_median": 79040.0, "mid_median": 73112.0, "p25": 66659.91500000001, "p75": 81016.0}, "Sales & Marketing": {"n": 280, "min_median": 69160.0, "max_median": 79040.0, "mid_median": 72500.0, "p25": 64793.04, "p75": 89190.0}, "IT & Technology": {"n": 173, "min_median": 88920.0, "max_median": 104000.0, "mid_median": 97500.0, "p25": 73179.0, "p75": 130000.0}, "Transport & Logistics": {"n": 428, "min_median": 65208.0, "max_median": 73112.0, "mid_median": 69160.0, "p25": 64627.94, "p75": 76004.5}, "Management & Leadership": {"n": 202, "min_median": 106328.56, "max_median": 111142.0, "mid_median": 109624.5, "p25": 81388.75, "p75": 133360.75}, "Other": {"n": 727, "min_median": 74060.47999999998, "max_median": 84968.0, "mid_median": 79198.08, "p25": 67184.0, "p75": 100787.52249999999}, "Legal": {"n": 12, "min_median": 62097.5, "max_median": 74449.0, "mid_median": 69418.5, "p25": 64255.875, "p75": 81358.91500000001}, "Manufacturing & Production": {"n": 44, "min_median": 65104.0, "max_median": 75088.0, "mid_median": 69580.0, "p25": 64126.14, "p75": 77995.19}, "Arts, Media & Design": {"n": 10, "min_median": 99136.0, "max_median": 104324.48000000001, "mid_median": 102330.71, "p25": 85000.0, "p75": 103763.875}, "HR & Recruitment": {"n": 23, "min_median": 74100.0, "max_median": 90000.0, "mid_median": 78052.0, "p25": 75000.0, "p75": 115000.0}, "Healthcare & Medical": {"n": 327, "min_median": 65208.0, "max_median": 73287.41, "mid_median": 69160.0, "p25": 64007.58, "p75": 87566.44}, "Cleaning & Facilities": {"n": 43, "min_median": 64417.6, "max_median": 70000.0, "mid_median": 68112.72, "p25": 64042.16, "p75": 77972.95999999999}, "Education & Training": {"n": 160, "min_median": 86284.28, "max_median": 117481.5, "mid_median": 101301.0, "p25": 79366.04000000001, "p75": 117155.5}, "Engineering": {"n": 8, "min_median": 91000.0, "max_median": 96000.0, "mid_median": 94000.0, "p25": 83610.0, "p75": 106250.0}, "Agriculture & Mining": {"n": 11, "min_median": 75000.0, "max_median": 75819.12, "mid_median": 75819.12, "p25": 71250.0, "p75": 88049.75}, "Security & Safety": {"n": 6, "min_median": 79728.5, "max_median": 85216.0, "mid_median": 82472.25, "p25": 69831.25, "p75": 143130.5}}, "salary_type_counts": {"Year": 2586, "Hour": 2035, "Not specified": 224, "Week": 94, "Day": 92, "Month": 34, "Fortnight": 14}};
+
+const fmt = n => n.toLocaleString('en-AU');
+const fmtMoney = n => '$' + Math.round(n).toLocaleString('en-AU');
+const fmtMoneyShort = n => {
+  if (n >= 1000) return '$' + (n/1000).toFixed(0) + 'k';
+  return '$' + Math.round(n);
+};
+const pct = (v, total) => ((v / total) * 100).toFixed(1);
+
+// classify skills as "hard" or "soft"
+const SOFT_SKILLS = new Set([
+  'Communication','Teamwork','Leadership','Problem Solving','Time Management',
+  'Attention to Detail','Adaptability / Flexibility','Multitasking','Interpersonal Skills',
+  'Customer Service','Stakeholder Management','Organisational Skills','Empathy / Compassion',
+  'Patience','Cultural Awareness','Reliability','Reliability / Punctual','Physical Fitness',
+  'Creative Thinking','Friendly / Outgoing','Communication with Patients','Confidentiality',
+  'Results Driven','Decision Making','Conflict Resolution','Presentation Skills',
+  'Analytical Skills','Analytical / Problem Solving','Working Independently',
+  'Flexibility / Availability','Stamina / Standing for Long Periods','Cleanliness / Hygiene',
+  'Quality / Workmanship','Mentoring / Coaching','Planning & Organisation','Basic Maths'
+]);
+function isSoft(skill) { return SOFT_SKILLS.has(skill); }
+
+function animateNumber(el, target, duration = 900, prefix='', suffix='') {
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = prefix + fmt(Math.round(target * eased)) + suffix;
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+animateNumber(document.getElementById('kpiTotal'), DATA.total_jobs);
+
+// KPIs — salary
+const salHero = DATA.overall_salary;
+document.getElementById('kpiMedSalary').innerHTML = `<span class="cur">$</span>${Math.round(salHero.mid_median).toLocaleString('en-AU')}`;
+document.getElementById('kpiMedSalarySub').textContent = `Mid of ${fmtMoneyShort(salHero.min_median)} – ${fmtMoneyShort(salHero.max_median)} band`;
+document.getElementById('kpiSalRecords').textContent = fmt(salHero.n_records);
+document.getElementById('kpiSalPct').textContent = `${pct(salHero.n_records, DATA.total_jobs)}% of listings`;
+
+// ---------- PLATFORM ----------
+const platforms = DATA.platform_counts;
+const totalJobs = DATA.total_jobs;
+const platformColors = { 'Indeed': '#2472B0', 'Seek': '#4A91C5', 'Jora': '#9DC9E6' };
+const platformGrid = document.getElementById('platformGrid');
+
+Object.entries(platforms).sort((a,b)=>b[1]-a[1]).forEach(([name,count]) => {
+  const p = (count / totalJobs) * 100;
+  const card = document.createElement('div');
+  card.className = 'platform-card';
+  const col = platformColors[name] || 'var(--primary)';
+  card.innerHTML = `
+    <div class="platform-name"><span class="platform-dot" style="background:${col}"></span>${name}</div>
+    <div class="platform-count">${fmt(count)}</div>
+    <div class="platform-bar"><div class="platform-bar-fill" style="width:0%;background:${col}"></div></div>
+    <div class="platform-pct"><strong>${p.toFixed(1)}%</strong> of total vacancies</div>
+  `;
+  platformGrid.appendChild(card);
+  requestAnimationFrame(() => {
+    card.querySelector('.platform-bar-fill').style.width = p + '%';
+  });
+});
+
+// Platform stacked bar
+const psLegend = document.getElementById('platformStackLegend');
+const psBar = document.getElementById('platformStackBar');
+const platEntries = Object.entries(platforms).sort((a,b)=>b[1]-a[1]);
+psLegend.innerHTML = platEntries.map(([n,c]) => `<span><i style="background:${platformColors[n]}"></i>${n} · ${fmt(c)} (${pct(c, totalJobs)}%)</span>`).join('');
+platEntries.forEach(([n, c]) => {
+  const seg = document.createElement('div');
+  seg.className = 'stack-segment';
+  seg.style.background = platformColors[n];
+  seg.style.width = '0%';
+  seg.textContent = `${n} ${pct(c, totalJobs)}%`;
+  psBar.appendChild(seg);
+  requestAnimationFrame(() => { seg.style.width = ((c / totalJobs) * 100) + '%'; });
+});
+
+const sortedPlat = platEntries;
+document.getElementById('platformInsight').innerHTML = 
+  `<strong>${sortedPlat[0][0]}</strong> leads with <strong>${fmt(sortedPlat[0][1])}</strong> listings (${pct(sortedPlat[0][1], totalJobs)}%), followed by <strong>${sortedPlat[1][0]}</strong> (${fmt(sortedPlat[1][1])}) and <strong>${sortedPlat[2][0]}</strong> (${fmt(sortedPlat[2][1])}). The three platforms are broadly balanced, giving a well-rounded view of the market.`;
+
+// ---------- OCCUPATION bar list ----------
+const occCounts = DATA.occupation_counts;
+const occBarList = document.getElementById('occBarList');
+const occEntries = Object.entries(occCounts).sort((a,b)=>b[1]-a[1]);
+const maxOcc = Math.max(...occEntries.map(e=>e[1]));
+occEntries.forEach(([name, count]) => {
+  const row = document.createElement('div');
+  row.className = 'bar-row';
+  row.innerHTML = `
+    <div class="label" title="${name}">${name}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    <div class="count">${fmt(count)}</div>
+  `;
+  occBarList.appendChild(row);
+  requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = ((count / maxOcc) * 100) + '%'; });
+});
+
+// Platform x Occupation — stacked mini bars (top 5 per platform as % of platform total)
+const platOccStack = document.getElementById('platformOccStack');
+// Build a set of top occupations shown (top 5 union)
+const occColorPool = ['#2472B0', '#4A91C5', '#6AADD4', '#9DC9E6', '#C6DFED', '#1A5583'];
+Object.entries(DATA.platform_occ).forEach(([plat, items]) => {
+  const top = items.slice(0, 5);
+  const totalP = platforms[plat];
+  const otherCount = totalP - top.reduce((a,b)=>a+b.count, 0);
+  const block = document.createElement('div');
+  block.className = 'mini-bar-block';
+  block.innerHTML = `
+    <div class="mbb-title">${plat}<span class="mbb-total">Total ${fmt(totalP)}</span></div>
+    <div class="mini-bar"></div>
+    <div class="mini-legend"></div>
+  `;
+  const bar = block.querySelector('.mini-bar');
+  const legend = block.querySelector('.mini-legend');
+  top.forEach((it, i) => {
+    const col = occColorPool[i];
+    const seg = document.createElement('div');
+    seg.style.background = col;
+    seg.style.width = '0%';
+    const p = (it.count / totalP) * 100;
+    if (p > 6) seg.textContent = p.toFixed(0) + '%';
+    bar.appendChild(seg);
+    requestAnimationFrame(() => { seg.style.width = p + '%'; });
+    legend.innerHTML += `<span><i style="background:${col}"></i>${it.occupation_area} · ${fmt(it.count)}</span>`;
+  });
+  // Other
+  if (otherCount > 0) {
+    const seg = document.createElement('div');
+    seg.style.background = 'var(--line)';
+    seg.style.color = 'var(--ink-mute)';
+    seg.style.width = '0%';
+    bar.appendChild(seg);
+    requestAnimationFrame(() => { seg.style.width = ((otherCount / totalP) * 100) + '%'; });
+    legend.innerHTML += `<span><i style="background:#E5EBF0"></i>Other areas · ${fmt(otherCount)}</span>`;
+  }
+  platOccStack.appendChild(block);
+});
+
+// Occupation insight
+const topOcc = occEntries[0];
+document.getElementById('occInsight').innerHTML = 
+  `<strong>${topOcc[0]}</strong> is the largest single cluster with <strong>${fmt(topOcc[1])}</strong> listings (${pct(topOcc[1], totalJobs)}% of total). <strong>Transport &amp; Logistics</strong>, <strong>Sales &amp; Marketing</strong>, and <strong>Healthcare &amp; Medical</strong> round out the top high-volume areas consistent across all three platforms.`;
+
+// ---------- STATES ----------
+const stateCounts = DATA.state_counts;
+const stateBarList = document.getElementById('stateBarList');
+const stateEntries = Object.entries(stateCounts).sort((a,b)=>b[1]-a[1]);
+const maxState = Math.max(...stateEntries.map(e=>e[1]));
+const stateFullNames = {
+  'NSW':'New South Wales','VIC':'Victoria','QLD':'Queensland','SA':'South Australia',
+  'WA':'Western Australia','TAS':'Tasmania','ACT':'Australian Capital Territory','NT':'Northern Territory'
+};
+stateEntries.forEach(([abbr, count]) => {
+  const row = document.createElement('div');
+  row.className = 'bar-row';
+  const full = stateFullNames[abbr] || abbr;
+  row.innerHTML = `
+    <div class="label" title="${full}">${abbr} <span style="color:var(--ink-mute);font-weight:400;font-size:11px">· ${full}</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    <div class="count">${fmt(count)}</div>
+  `;
+  stateBarList.appendChild(row);
+  requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = ((count / maxState) * 100) + '%'; });
+});
+
+const stateTabs = document.getElementById('stateTabs');
+const stateOccList = document.getElementById('stateOccList');
+stateEntries.forEach(([abbr, count], i) => {
+  const btn = document.createElement('button');
+  btn.className = 'state-tab' + (i === 0 ? ' active' : '');
+  btn.innerHTML = `${abbr}<span class="tab-count">${fmt(count)}</span>`;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.state-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderStateOcc(abbr);
+  });
+  stateTabs.appendChild(btn);
+});
+function renderStateOcc(state) {
+  stateOccList.innerHTML = '';
+  const items = DATA.top_occ_per_state[state] || [];
+  const maxC = Math.max(...items.map(x => x.count));
+  items.forEach(it => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="label" title="${it.occupation_area}">${it.occupation_area}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+      <div class="count">${fmt(it.count)}</div>
+    `;
+    stateOccList.appendChild(row);
+    requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = ((it.count / maxC) * 100) + '%'; });
+  });
+}
+renderStateOcc(stateEntries[0][0]);
+
+const stateGrid = document.getElementById('stateGrid');
+stateEntries.forEach(([abbr, count]) => {
+  const top = (DATA.top_occ_per_state[abbr] || []).slice(0, 3);
+  const card = document.createElement('div');
+  card.className = 'state-card';
+  card.innerHTML = `
+    <div class="state-card-head">
+      <div><div class="state-abbrev">${abbr}</div><div class="state-total-label">Total vacancies</div></div>
+      <div style="text-align:right"><div class="state-total">${fmt(count)}</div></div>
+    </div>
+    <div class="state-top-list">
+      ${top.map(t => `<div class="state-top-item"><span>${t.occupation_area}</span><span class="mini-count">${fmt(t.count)}</span></div>`).join('')}
+    </div>
+  `;
+  stateGrid.appendChild(card);
+});
+
+// ---------- SALARY ----------
+// Hero
+document.getElementById('salaryHeroValue').innerHTML = `<span class="cur">$</span>${Math.round(salHero.mid_median).toLocaleString('en-AU')}`;
+document.getElementById('salaryHeroRange').innerHTML = `Typical band <strong>${fmtMoney(salHero.min_median)}</strong> to <strong>${fmtMoney(salHero.max_median)}</strong> · 25th–75th percentile <strong>${fmtMoney(salHero.p25)} – ${fmtMoney(salHero.p75)}</strong>`;
+document.getElementById('salaryHeroHint').textContent = `Based on ${fmt(salHero.n_records)} listings (${pct(salHero.n_records, DATA.total_jobs)}% of total) that provide salary info. All values annualised.`;
+
+// Salary-type donut
+const salTypeColors = {
+  'Year': '#2472B0', 'Hour': '#4A91C5', 'Week': '#6AADD4',
+  'Day': '#9DC9E6', 'Month': '#C6DFED', 'Fortnight': '#E3EDF5',
+  'Not specified': '#CCD8E2'
+};
+function renderDonut(dataMap, container, legendEl, colorMap, orderPref) {
+  container.innerHTML = '';
+  legendEl.innerHTML = '';
+  const total = Object.values(dataMap).reduce((a,b)=>a+b, 0);
+  if (total === 0) { container.innerHTML = '<div style="color:var(--ink-mute);font-size:12px">No data</div>'; return; }
+  const size = 170;
+  const r = 66;
+  const cx = size/2, cy = size/2;
+  const circumference = 2 * Math.PI * r;
+  let svg = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg)">`;
+  let offset = 0;
+  const entries = (orderPref || Object.keys(dataMap)).filter(k => dataMap[k]).map(k => [k, dataMap[k]]);
+  // ensure any missing (not in orderPref) are included at end
+  Object.keys(dataMap).forEach(k => {
+    if (!entries.find(e => e[0] === k)) entries.push([k, dataMap[k]]);
+  });
+  entries.forEach(([label, val]) => {
+    const frac = val / total;
+    const dash = frac * circumference;
+    const color = (colorMap && colorMap[label]) || '#999';
+    svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="26" stroke-dasharray="${dash} ${circumference - dash}" stroke-dashoffset="${-offset}"/>`;
+    offset += dash;
+  });
+  svg += `</svg>`;
+  container.innerHTML = `<div style="position:relative;display:inline-block">
+    ${svg}
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none">
+      <div style="font-family:'Instrument Serif',serif;font-size:26px;color:var(--ink);line-height:1">${fmt(total)}</div>
+      <div style="font-size:10px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;margin-top:2px">Listings</div>
+    </div>
+  </div>`;
+  entries.forEach(([label, val]) => {
+    const row = document.createElement('div');
+    row.className = 'exp-item';
+    row.innerHTML = `
+      <div class="exp-swatch" style="background:${(colorMap && colorMap[label]) || '#999'}"></div>
+      <div class="exp-name">${label}</div>
+      <div class="exp-num">${fmt(val)}</div>
+      <div class="exp-pct">${pct(val, total)}%</div>
+    `;
+    legendEl.appendChild(row);
+  });
+}
+renderDonut(DATA.salary_type_counts, document.getElementById('salaryTypeDonut'), document.getElementById('salaryTypeLegend'), salTypeColors, ['Year','Hour','Week','Day','Month','Fortnight','Not specified']);
+
+// Per-occupation salary rows — using a min-max range bar with median mark
+const salaryRows = document.getElementById('salaryRows');
+const salEntries = Object.entries(DATA.salary_per_occ)
+  .filter(([_, s]) => s !== null)
+  .sort((a,b) => b[1].mid_median - a[1].mid_median);
+
+// Find min/max across all for scale
+const globalMin = Math.min(...salEntries.map(e => e[1].min_median));
+const globalMax = Math.max(...salEntries.map(e => e[1].max_median));
+// Add scale track at top
+const scaleDiv = document.createElement('div');
+scaleDiv.className = 'range-scale';
+scaleDiv.style.gridColumn = '2';
+// Build a header with scale
+const scaleHeader = document.createElement('div');
+scaleHeader.style.display = 'grid';
+scaleHeader.style.gridTemplateColumns = '180px 1fr 90px 70px';
+scaleHeader.style.gap = '14px';
+scaleHeader.style.paddingBottom = '2px';
+scaleHeader.style.marginBottom = '4px';
+scaleHeader.innerHTML = `<div></div>
+  <div class="range-scale" style="padding:0 2px 6px">
+    <span>${fmtMoneyShort(globalMin)}</span>
+    <span>${fmtMoneyShort(globalMin + (globalMax-globalMin)*0.25)}</span>
+    <span>${fmtMoneyShort(globalMin + (globalMax-globalMin)*0.5)}</span>
+    <span>${fmtMoneyShort(globalMin + (globalMax-globalMin)*0.75)}</span>
+    <span>${fmtMoneyShort(globalMax)}</span>
+  </div>
+  <div></div>
+  <div></div>`;
+salaryRows.appendChild(scaleHeader);
+
+salEntries.forEach(([occ, s]) => {
+  const minPct = ((s.min_median - globalMin) / (globalMax - globalMin)) * 100;
+  const widthPct = ((s.max_median - s.min_median) / (globalMax - globalMin)) * 100;
+  const medPct = ((s.mid_median - globalMin) / (globalMax - globalMin)) * 100;
+  const row = document.createElement('div');
+  row.className = 'salary-row';
+  row.innerHTML = `
+    <div class="label" title="${occ}">${occ}</div>
+    <div>
+      <div class="range-track">
+        <div class="range-fill" style="left:${minPct}%; width:0%"></div>
+        <div class="range-median" style="left:calc(${medPct}% - 1.5px)"></div>
+      </div>
+    </div>
+    <div class="median">${fmtMoney(s.mid_median)}</div>
+    <div class="n-col">${fmt(s.n)}</div>
+  `;
+  salaryRows.appendChild(row);
+  requestAnimationFrame(() => { row.querySelector('.range-fill').style.width = widthPct + '%'; });
+});
+
+// ---------- Skills overall ----------
+const skillsOverall = document.getElementById('skillsOverall');
+const topSkillsAll = DATA.top_skills_overall;
+const maxSkillAll = Math.max(...topSkillsAll.map(s => s.count));
+topSkillsAll.forEach(s => {
+  const softBadge = isSoft(s.skill) ? '<span class="skill-type soft">SOFT</span>' : '<span class="skill-type hard">HARD</span>';
+  const row = document.createElement('div');
+  row.className = 'skill-row';
+  row.innerHTML = `
+    <div class="label" title="${s.skill}">${s.skill}${softBadge}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    <div class="count">${fmt(s.count)}</div>
+  `;
+  skillsOverall.appendChild(row);
+  requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = ((s.count / maxSkillAll) * 100) + '%'; });
+});
+
+// ---------- Skills by occupation (enhanced) ----------
+const occsForSkills = occEntries.filter(e => e[0] !== 'Other').map(e => e[0]);
+const occSelectorSkills = document.getElementById('occSelectorSkills');
+occsForSkills.forEach((occ, i) => {
+  const chip = document.createElement('button');
+  chip.className = 'occ-chip' + (i === 0 ? ' active' : '');
+  chip.textContent = occ;
+  chip.addEventListener('click', () => {
+    occSelectorSkills.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderSkillsByOcc(occ);
+  });
+  occSelectorSkills.appendChild(chip);
+});
+
+function renderSkillsByOcc(occ) {
+  const container = document.getElementById('skillsByOcc');
+  const header = document.getElementById('skillsHeader');
+  container.innerHTML = '';
+  const skills = DATA.top_skills_per_occ[occ] || [];
+  const occCount = DATA.occupation_counts[occ] || 0;
+  const sal = DATA.salary_per_occ[occ];
+  const hardCount = skills.filter(s => !isSoft(s.skill)).length;
+  const softCount = skills.filter(s => isSoft(s.skill)).length;
+  header.innerHTML = `
+    <div class="label-xs">Selected Occupation</div>
+    <div class="occ-name">${occ}</div>
+    <div class="meta-line"><strong>${fmt(occCount)}</strong> vacancies · showing top ${skills.length} skills (<strong>${hardCount}</strong> technical/certification, <strong>${softCount}</strong> soft)${sal ? ` · Median salary <strong>${fmtMoney(sal.mid_median)}</strong>` : ''}</div>
+  `;
+  if (skills.length === 0) {
+    container.innerHTML = '<div style="font-size:12px;color:var(--ink-mute);padding:12px 0">No skill signals detected for this occupation area.</div>';
+    return;
+  }
+  const maxC = Math.max(...skills.map(s => s.count));
+  skills.forEach(s => {
+    const soft = isSoft(s.skill);
+    const badge = soft ? '<span class="skill-type soft">SOFT</span>' : '<span class="skill-type hard">HARD</span>';
+    const row = document.createElement('div');
+    row.className = 'skill-row';
+    const barColor = soft ? 'var(--primary-light)' : 'var(--primary)';
+    row.innerHTML = `
+      <div class="label" title="${s.skill}">${s.skill}${badge}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:${barColor}"></div></div>
+      <div class="count">${fmt(s.count)}</div>
+    `;
+    container.appendChild(row);
+    requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = ((s.count / maxC) * 100) + '%'; });
+  });
+}
+renderSkillsByOcc(occsForSkills[0]);
+
+// ---------- Experience donut ----------
+const expOrder = ['Entry Level / Graduate', 'Junior / Associate', 'Mid Level', 'Senior / Lead', 'Executive / Director', 'Experienced (Not Specified)'];
+const expColors = {
+  'Entry Level / Graduate': '#9DC9E6',
+  'Junior / Associate': '#6AADD4',
+  'Mid Level': '#4A91C5',
+  'Senior / Lead': '#2472B0',
+  'Executive / Director': '#1A5583',
+  'Experienced (Not Specified)': '#CCD8E2'
+};
+renderDonut(DATA.exp_counts, document.getElementById('expDonut'), document.getElementById('expLegend'), expColors, expOrder);
+
+const occsForExp = occEntries.filter(e => e[0] !== 'Other').map(e => e[0]);
+const occSelectorExp = document.getElementById('occSelectorExp');
+occsForExp.forEach((occ, i) => {
+  const chip = document.createElement('button');
+  chip.className = 'occ-chip' + (i === 0 ? ' active' : '');
+  chip.textContent = occ;
+  chip.addEventListener('click', () => {
+    occSelectorExp.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderExpByOcc(occ);
+  });
+  occSelectorExp.appendChild(chip);
+});
+function renderExpByOcc(occ) {
+  const container = document.getElementById('expByOcc');
+  container.innerHTML = '';
+  const expMap = DATA.exp_per_occ[occ] || {};
+  const total = Object.values(expMap).reduce((a,b)=>a+b, 0);
+  if (total === 0) { container.innerHTML = '<div style="font-size:12px;color:var(--ink-mute);padding:12px 0">No data for this occupation.</div>'; return; }
+  const ordered = expOrder.filter(k => expMap[k]).map(k => [k, expMap[k]]);
+  const maxC = Math.max(...ordered.map(e => e[1]));
+  ordered.forEach(([label, val]) => {
+    const row = document.createElement('div');
+    row.className = 'skill-row';
+    row.innerHTML = `
+      <div class="label" style="display:flex;align-items:center;gap:8px">
+        <span style="width:10px;height:10px;border-radius:2px;background:${expColors[label]};flex-shrink:0"></span>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${label}">${label}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:${expColors[label]}"></div></div>
+      <div class="count">${fmt(val)} <span style="color:var(--ink-mute);font-size:11px">(${pct(val, total)}%)</span></div>
+    `;
+    container.appendChild(row);
+    requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = ((val / maxC) * 100) + '%'; });
+  });
+}
+renderExpByOcc(occsForExp[0]);
+</script>
+</body>
+</html>
